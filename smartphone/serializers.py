@@ -14,7 +14,7 @@ class SmartPhoneSerializer():
         sites = ['jumia','tunisianet']
         Phones = list()
         for site in sites:
-            File = open(f'A:\python\web shop\phone bot\e-shop\{site}.txt','r')
+            File = open(f'.\e-shop\{site}.txt','r')
             data = File.read()
             data = data.split('\n')
             data.remove('')
@@ -43,7 +43,7 @@ class SmartPhoneSerializer():
         Sites= ['spacenet','tryandbuy','wiki','tunisiatech']
         Phones = list()
         for site in Sites:
-            File = open('A:\python\web shop\phone bot\e-shop\{}.txt'.format(site),'r',encoding="utf8")
+            File = open('.\e-shop\{}.txt'.format(site),'r',encoding="utf8")
             data = File.readlines()
             data = [ d.replace('\n','') for d in data ]
             data = [ f"{d.replace(' ','')}" for d in data ]
