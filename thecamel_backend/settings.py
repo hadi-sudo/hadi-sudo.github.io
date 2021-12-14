@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-!fpxqipltal0v5z2@3fcv!-j(60k^__xtqm=v47g(z#z8^@ior
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.8','192.168.8.9','192.168.1.9','127.0.0.1']
+ALLOWED_HOSTS = ['thecamel.herokuapp.com']
 
 
 # Application definition
