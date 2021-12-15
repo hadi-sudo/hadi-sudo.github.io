@@ -81,7 +81,12 @@ WSGI_APPLICATION = 'thecamel_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd6r2f04gaqljbj',
+        'USER':'vftclowmlnyjsy',
+        'PASSWORD':'91208346a4590d9830ba9c3fd2db8f75c8fd2d45f92f5e52d75223fd628a0dc9',
+        'HOST':'ec2-54-155-87-214.eu-west-1.compute.amazonaws.com',
+        'PORT':'5432',
     }
 
 }
