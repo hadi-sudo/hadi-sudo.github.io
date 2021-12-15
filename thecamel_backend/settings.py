@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-!fpxqipltal0v5z2@3fcv!-j(60k^__xtqm=v47g(z#z8^@ior'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['thecamel.herokuapp.com']
 
