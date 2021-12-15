@@ -5,16 +5,22 @@ from .models import *
 import json
 import re
 import ast
+from django.conf import settings
+import os
+
 
 class SmartPhoneSerializer():
     def __init__(self) -> None:
         pass
 
     def get_tunisianet(self):
+        base_dir =settings.MEDIA_ROOT    
+        
         sites = ['jumia','tunisianet']
         Phones = list()
         for site in sites:
-            File = open(f'.\e-shop\{site}.txt','r')
+            my_file = os.path.join(base_dir, str(site))
+            File = open(f'{base_dir}\{site}.txt','r')
             data = File.read()
             data = data.split('\n')
             data.remove('')
@@ -43,7 +49,7 @@ class SmartPhoneSerializer():
         Sites= ['spacenet','tryandbuy','wiki','tunisiatech']
         Phones = list()
         for site in Sites:
-            File = open('.\e-shop\{}.txt'.format(site),'r',encoding="utf8")
+            File = open('e-shop\{}.txt'.format(site),'r',encoding="utf8")
             data = File.readlines()
             data = [ d.replace('\n','') for d in data ]
             data = [ f"{d.replace(' ','')}" for d in data ]
