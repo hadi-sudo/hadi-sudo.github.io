@@ -45,11 +45,12 @@ class SmartPhoneSerializer():
 
 
     def get_phone(self):
+        base_dir =settings.MEDIA_ROOT
         #,'jumia','mytek','tunisianet'
         Sites= ['spacenet','tryandbuy','wiki','tunisiatech']
         Phones = list()
         for site in Sites:
-            File = open('e-shop\{}.txt'.format(site),'r',encoding="utf8")
+            File = open(f'{base_dir}\{site}.txt','r',encoding="utf8")
             data = File.readlines()
             data = [ d.replace('\n','') for d in data ]
             data = [ f"{d.replace(' ','')}" for d in data ]
