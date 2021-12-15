@@ -62,8 +62,9 @@ class SmartPhoneSerializer():
         return Phones
 
     def get_mark(self):
+        base_dir =settings.MEDIA_ROOT
         marks = list()
-        with open('A:\python\web shop\phone bot\e-shop\marks.txt','r') as file:
+        with open(f'{base_dir}/marks.txt','r') as file:
             data = file.readlines()
             data = [ d.replace('\n','') for d in data ]
             file.close()
