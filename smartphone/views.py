@@ -21,9 +21,11 @@ def smartphone_data(request):
         data1 = SmartPhoneSerializer().get_tunisianet()
         phone = data1 +data
         def price(prix):
+            if ("\u202f" in prix):
+                prix =prix.replace('\u202f','')
             if (prix.find(".")!=-1):
                 prix.replace(',','')
-                t = prix.find(".")
+                t = int(prix.find("."))
                 return int(prix[0:t].replace(',',''))
             t = prix.find(",")
             return int(prix[0:t].replace(' ',''))

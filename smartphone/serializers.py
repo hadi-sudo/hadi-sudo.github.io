@@ -47,7 +47,7 @@ class SmartPhoneSerializer():
     def get_phone(self):
         base_dir =settings.MEDIA_ROOT
         #,'jumia','mytek','tunisianet'
-        Sites= ['spacenet','tryandbuy','wiki','tunisiatech']
+        Sites= ['spacenet','tryandbuy','wiki','tunisiatech',"mytek"]
         Phones = list()
         for site in Sites:
             File = open(f'{base_dir}/{site}.txt','r',encoding="utf8")
