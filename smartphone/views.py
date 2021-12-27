@@ -20,7 +20,7 @@ def smartphone_data(request):
         data = SmartPhoneSerializer().get_phone()
         data1 = SmartPhoneSerializer().get_tunisianet()
         phone = data1 +data
-        def price(prix):
+        def price(prix,phone):
             if ("\u202f" in prix):
                 prix =prix.replace('\u202f','')
             if (prix.find(".")!=-1):
@@ -31,7 +31,7 @@ def smartphone_data(request):
             return int(prix[0:t].replace(' ',''))
         p = sorted(
             phone,
-            key = lambda phone:price(phone['price']))
+            key = lambda phone:price(phone['price'],phone["name"]))
 
         return Response(p)
 

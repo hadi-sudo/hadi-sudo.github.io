@@ -34,20 +34,21 @@ class SmartPhoneSerializer():
             File.close()
 
         def price(prix):
+            print(prix)
             if (prix.find(".")!=-1):
                 prix.replace(',','')
                 t = prix.find(".")
-                return int(prix[0:t].replace(',',''))
+                return int(float(prix[0:t].replace(',','')))
             t = prix.find(",")
-            return int(prix[0:t].replace(' ',''))
+            return int(float(prix[0:t].replace(' ','')))
         p = sorted(Phones,key = lambda phone:price(phone['price']))
         return p
 
 
     def get_phone(self):
         base_dir =settings.MEDIA_ROOT
-        #,'jumia','mytek','tunisianet'
-        Sites= ['spacenet','tryandbuy','wiki','mytek','tunisiatech',"affariyet"]
+        #,'jumia','mytek','tunisianet','tryandbuy'
+        Sites= ['spacenet','wiki','mytek','tunisiatech',"affariyet"]
         Phones = list()
         for site in Sites:
             File = open(f'{base_dir}/{site}.txt','r',encoding="utf8")
