@@ -13,14 +13,15 @@ class SmartPhoneSerializer():
     def __init__(self) -> None:
         pass
 
-    def get_tunisianet(self):
+    def get_phone_special(self):
         base_dir =settings.MEDIA_ROOT    
-        
         sites = ['jumia','tunisianet',"zoom"]
         Phones = list()
         for site in sites:
             my_file = os.path.join(base_dir, str(site))
             File = open(f'{base_dir}/{site}.txt','r')
+            des = open(f'{base_dir}/des_{site}.txt','r',encoding="utf8")
+            descp  = des.readlines()
             data = File.read()
             data = data.split('\n')
             data.remove('')
@@ -30,11 +31,13 @@ class SmartPhoneSerializer():
                 for i in n:
                     m = i.split('+')
                     test[m[0]]=m[1]
+                test["description"]=descp[data.index(n)]
                 Phones.append(test)
             File.close()
-
+            print(len(Phones))
+            print(len(descp))
+            des.close()
         def price(prix):
-            print(prix)
             if (prix.find(".")!=-1):
                 prix.replace(',','')
                 t = prix.find(".")
@@ -45,22 +48,34 @@ class SmartPhoneSerializer():
         return p
 
 
+
     def get_phone(self):
         base_dir =settings.MEDIA_ROOT
         #,'jumia','mytek','tunisianet','tryandbuy'
-        Sites= ['spacenet','wiki','mytek','tunisiatech',"affariyet"]
+        Sites= ['spacenet','wiki','mytek','tunisiatech','affariyet','tryandbuy']
         Phones = list()
         for site in Sites:
             File = open(f'{base_dir}/{site}.txt','r',encoding="utf8")
+            des = open(f'{base_dir}/des_{site}.txt','r',encoding="utf8")
+            descp  = des.readlines()
             data = File.readlines()
             data = [ d.replace('\n','') for d in data ]
-            data = [ f"{d.replace(' ','')}" for d in data ]
+            data = [ d.replace(' ','') for d in data ]
             data = [ d.replace("'", '"') for d in data ]
             data = [ json.loads(i) for i in data]
+            for i in data:
+                 i["description"]=descp[data.index(i)] 
             Phones+=data
+            des.close()
         File.close()
         # sorted(Phones,key = lambda phone:phone['price'])
         return Phones
+
+    def get_descp(self):
+        base_dir =settings.MEDIA_ROOT    
+        sites = ['jumia','tunisianet',"zoom"]
+        Phones = list()
+
 
     def get_mark(self):
         base_dir =settings.MEDIA_ROOT
