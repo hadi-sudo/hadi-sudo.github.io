@@ -20,7 +20,7 @@ def smartphone_data(request):
         data = SmartPhoneSerializer().get_phone()
         data1 = SmartPhoneSerializer().get_phone_special()
         phone = data1 +data
-        def price(prix,phone):
+        def price(prix):
             if ("\u202f" in prix):
                 prix =prix.replace('\u202f','')
             if (prix.find(".")!=-1):
@@ -32,7 +32,7 @@ def smartphone_data(request):
         try:
             p = sorted(
                 phone,
-                key = lambda phone:price(phone['price'],phone["name"]))
+                key = lambda phone:price(phone['price']))
         except Exception as e:
             print(e)
         return Response(p)
@@ -42,5 +42,43 @@ def smartphone_data(request):
 def smartphone_mark(request):
     if request.method=='GET':
         smartphone = SmartPhone.objects.all()
-        data = SmartPhoneSerializer().get_mark()
+        data = SmartPhoneSerializer()
+        data = data.get_mark("smartphones")
         return Response(data)
+
+@api_view(['GET'])
+def laptop_mark(request):
+    if request.method=='GET':
+        laptop = SmartPhone.objects.all()
+        data = SmartPhoneSerializer()
+        data = data.get_mark("laptop")
+        return Response(data)
+
+@api_view(['GET'])
+def laptop_data(request):
+    if request.method=='GET':
+        laptop = list()
+        data = SmartPhoneSerializer().get_laptop()
+        data1 = SmartPhoneSerializer().get_laptop_special()
+        laptop = data1 +data
+        def price(prix,phone):
+            # print(phone)
+            # if ("\â€¯" in prix):
+            prix =prix.replace('\u202f','')
+            prix = prix.replace('â€¯','')
+            if (prix.find(".")!=-1):
+                prix.replace(',','')
+                t = int(prix.find("."))
+                # print(int(float(prix[0:t].replace(',',''))))
+                return int(float(prix[0:t].replace(',','')))
+            t = prix.find(",")
+            # print(int(float(prix[0:t].replace(' ',''))))
+            return int(float(prix[0:t].replace(' ','')))
+        try:
+            laptops = sorted(
+                laptop,
+                key = lambda laptop:price(laptop['price'],laptop["url"])
+                )
+        except Exception as e:
+            print(f"error {e}")
+        return Response(laptops)
