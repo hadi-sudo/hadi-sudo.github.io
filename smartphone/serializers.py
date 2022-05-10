@@ -13,56 +13,17 @@ class SmartPhoneSerializer():
     def __init__(self) -> None:
         pass
 
-    def get_phone_special(self):
-        base_dir =settings.MEDIA_ROOT    
-        sites = ['jumia','tunisianet',"zoom"]
-        Phones = list()
-        for site in sites:
-            my_file = os.path.join(base_dir, str(site))
-            File = open(f'{base_dir}/smartphones/{site}.txt','r')
-            des = open(f'{base_dir}/smartphones/des_{site}.txt','r',encoding="utf8")
-            descp  = des.readlines()
-            data = File.read()
-            data = data.split('\n')
-            data.remove('')
-            data = [ i.split("#") for i in data]
-            for n in data:
-                test = dict()
-                for i in n:
-                    m = i.split('+')
-                    test[m[0]]=m[1]
-                test["description"]=descp[data.index(n)]
-                Phones.append(test)
-            File.close()
-            des.close()
-        def price(prix):
-            if (prix.find(".")!=-1):
-                prix.replace(',','')
-                t = prix.find(".")
-                return int(float(prix[0:t].replace(',','')))
-            t = prix.find(",")
-            return int(float(prix[0:t].replace(' ','')))
-        p = sorted(Phones,key = lambda phone:price(phone['price']))
-        return p
-
     def get_phone(self):
         base_dir =settings.MEDIA_ROOT
         #,'jumia','mytek','tunisianet','tryandbuy'
-        Sites= ['spacenet','wiki','mytek','tunisiatech','affariyet','tryandbuy']
+        Sites= ['spacenet','wiki','mytek','tunisiatech','affariyet','tryandbuy','tunisianet',"zoom"]
         Phones = list()
         for site in Sites:
-            File = open(f'{base_dir}/smartphones/{site}.txt','r',encoding="utf8")
-            des = open(f'{base_dir}/smartphones/des_{site}.txt','r',encoding="utf8")
-            descp  = des.readlines()
-            data = File.readlines()
-            data = [ d.replace('\n','') for d in data ]
-            data = [ d.replace(' ','') for d in data ]
-            data = [ d.replace("'", '"') for d in data ]
-            data = [ json.loads(i) for i in data]
-            for i in data:
-                 i["description"]=descp[data.index(i)] 
-            Phones+=data
-            des.close()
+            File = open(f'{base_dir}/smartphones/{site}.txt','r',encoding="utf-8")
+            ligne= File.readline()
+            while ligne!="":
+                Phones.append(ast.literal_eval(ligne))
+                ligne=File.readline()
         File.close()
         return Phones
 

@@ -18,8 +18,8 @@ def smartphone_data(request):
     if request.method=='GET':
         phone = list()
         data = SmartPhoneSerializer().get_phone()
-        data1 = SmartPhoneSerializer().get_phone_special()
-        phone = data1 +data
+        # data1 = SmartPhoneSerializer().get_phone_special()
+        phone =data
         def price(prix):
             if ("\u202f" in prix):
                 prix =prix.replace('\u202f','')
